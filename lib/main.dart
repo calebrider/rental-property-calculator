@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:real_estate_app/shared/constants.dart';
@@ -138,7 +139,7 @@ class _HomeState extends State<Home> {
                             child: TextField(
                                 style: textInputStyle,
                                 textAlign: TextAlign.center,
-                                textAlignVertical: TextAlignVertical.center,
+                                textAlignVertical: TextAlignVertical.bottom,
                                 controller: purchasePriceController,
                                 keyboardType: TextInputType.number,
                                 inputFormatters: <TextInputFormatter>[
@@ -177,7 +178,7 @@ class _HomeState extends State<Home> {
                             child: TextField(
                               style: textInputStyle,
                               textAlign: TextAlign.center,
-                              textAlignVertical: TextAlignVertical.center,
+                              textAlignVertical: TextAlignVertical.bottom,
                               controller: downPaymentController,
                               keyboardType: TextInputType.number,
                               inputFormatters: <TextInputFormatter>[
@@ -205,51 +206,59 @@ class _HomeState extends State<Home> {
                             },
                         ),
                           Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Expanded(
-                                child: Container(
+                              Container(
                                   child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
-                                      Container(
-                                        alignment: Alignment.bottomLeft,
-                                        child: Text('Loan Term',
+                                      Text('Loan Term',
                                           style: inputLabelStyle,
                                         ),
-                                      ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(100.0),
+                                      Neumorphic(
+                                          style: neumorphicTextFieldStyle,
+                                          child: Padding(
+                                            padding: const EdgeInsets.fromLTRB(30.0, 0, 30.0, 0),
+                                            child: DropdownButton(
+                                                //dropdownColor: Colors.lightBlueAccent,
+                                                elevation: 5,
+                                                hint: Text(
+                                                  'Years',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    fontFamily: 'Quicksand',
+                                                    fontSize: 18.0,
+                                                    letterSpacing: 2.0,
+                                                    color: Colors.grey,
+                                                  ),
+                                                ),
+                                                icon: Icon(Icons.arrow_drop_down),
+                                                value: _loanTermVal,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    _loanTermVal = value;
+                                                  });
+                                                },
+                                                items: _loanTermList.map((value) {
+                                                  return DropdownMenuItem(
+                                                    value: value,
+                                                    child: Text(value),
+                                                  );
+                                                }).toList()
+                                            ),
+                                          ),
                                         ),
-                                        child: DropdownButton(
-                                            //dropdownColor: Colors.lightBlueAccent,
-                                            elevation: 5,
-                                            icon: Icon(Icons.arrow_drop_down),
-                                            value: _loanTermVal,
-                                            onChanged: (value) {
-                                              setState(() {
-                                                _loanTermVal = value;
-                                              });
-                                            },
-                                            items: _loanTermList.map((value) {
-                                              return DropdownMenuItem(
-                                                value: value,
-                                                child: Text(value),
-                                              );
-                                            }).toList()
-                                        ),
-                                      ),
                                     ],
                                   ),
                                 ),
-                              ),
                               Padding(padding: EdgeInsets.all(10.0)),
                               Expanded(
                                 child: Container(
                                   child: Column(
                                     children: [
                                       Container(
-                                        alignment: Alignment.bottomLeft,
+                                        alignment: Alignment.bottomCenter,
                                         child: Text('Interest Rate',
                                           style: inputLabelStyle,
                                         ),
@@ -261,7 +270,7 @@ class _HomeState extends State<Home> {
                                             child: TextField(
                                                 style: textInputStyle,
                                                 textAlign: TextAlign.center,
-                                                textAlignVertical: TextAlignVertical.center,
+                                                textAlignVertical: TextAlignVertical.bottom,
                                                 controller: interestRateController,
                                                 keyboardType: TextInputType.number,
                                                 inputFormatters: <TextInputFormatter>[
@@ -330,7 +339,7 @@ class _HomeState extends State<Home> {
                             child: TextField(
                                 style: textInputStyle,
                                 textAlign: TextAlign.center,
-                                textAlignVertical: TextAlignVertical.center,
+                                textAlignVertical: TextAlignVertical.bottom,
                                 controller: repairsController,
                                 keyboardType: TextInputType.number,
                                 inputFormatters: <TextInputFormatter>[
@@ -351,7 +360,7 @@ class _HomeState extends State<Home> {
                             child: TextField(
                                 style: textInputStyle,
                                 textAlign: TextAlign.center,
-                                textAlignVertical: TextAlignVertical.center,
+                                textAlignVertical: TextAlignVertical.bottom,
                                 controller: propertyTaxesController,
                                 keyboardType: TextInputType.number,
                                 inputFormatters: <TextInputFormatter>[
@@ -372,7 +381,7 @@ class _HomeState extends State<Home> {
                             child: TextField(
                                 style: textInputStyle,
                                 textAlign: TextAlign.center,
-                                textAlignVertical: TextAlignVertical.center,
+                                textAlignVertical: TextAlignVertical.bottom,
                                 controller: insuranceController,
                                 keyboardType: TextInputType.number,
                                 inputFormatters: <TextInputFormatter>[
@@ -393,7 +402,7 @@ class _HomeState extends State<Home> {
                             child: TextField(
                                 style: textInputStyle,
                                 textAlign: TextAlign.center,
-                                textAlignVertical: TextAlignVertical.center,
+                                textAlignVertical: TextAlignVertical.bottom,
                                 controller: capitalExpenditureController,
                                 keyboardType: TextInputType.number,
                                 inputFormatters: <TextInputFormatter>[
