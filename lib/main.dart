@@ -27,7 +27,6 @@ class _HomeState extends State<Home> {
   String _loanTermVal;
   List _loanTermList = ['15', '20', '30'];
 
-  var _vacancy;
   var _pMI;
   var _monthlyPayment;
 
@@ -78,6 +77,11 @@ class _HomeState extends State<Home> {
       decimalSeparator: '.', thousandSeparator: ',', leftSymbol: '\$');
   var _capitalExpenditure;
 
+  var vacancyController = MoneyMaskedTextController(
+      decimalSeparator: '.', thousandSeparator: ',', rightSymbol: '%');
+  var _vacancy;
+
+
   var _cashFlow = 0.0;
   var _cashOnCashReturn = 0.0;
 
@@ -100,7 +104,7 @@ class _HomeState extends State<Home> {
           backgroundColor: Colors.lightBlueAccent,
 
         ),
-        body: Padding(padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
+        body: Padding(padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
           child: Column(
             children: [
               Row(mainAxisAlignment: MainAxisAlignment.center,
@@ -134,7 +138,7 @@ class _HomeState extends State<Home> {
                               style: inputLabelStyle,
                             ),
                           ),
-                          Neumorphic(
+                          Neumorphic(margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
                             style: neumorphicTextFieldStyle,
                             child: TextField(
                                 style: textInputStyle,
@@ -173,7 +177,7 @@ class _HomeState extends State<Home> {
                               style: inputLabelStyle,
                             ),
                           ),
-                          Neumorphic(
+                          Neumorphic(margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
                             style: neumorphicTextFieldStyle,
                             child: TextField(
                               style: textInputStyle,
@@ -216,36 +220,47 @@ class _HomeState extends State<Home> {
                                       Text('Loan Term',
                                           style: inputLabelStyle,
                                         ),
-                                      Neumorphic(
-                                          style: neumorphicTextFieldStyle,
+                                      Neumorphic(margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
+                                          style: neumorphicDropdownButtonStyle,
                                           child: Padding(
-                                            padding: const EdgeInsets.fromLTRB(30.0, 0, 30.0, 0),
-                                            child: DropdownButton(
-                                                //dropdownColor: Colors.lightBlueAccent,
-                                                elevation: 5,
-                                                hint: Text(
-                                                  'Years',
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                    fontFamily: 'Quicksand',
-                                                    fontSize: 18.0,
-                                                    letterSpacing: 2.0,
-                                                    color: Colors.grey,
+                                            padding: const EdgeInsets.fromLTRB(30.0, 3, 30.0, 3),
+                                            child: DropdownButtonHideUnderline(
+                                              child: DropdownButton(
+                                                  dropdownColor: Colors.lightBlueAccent,
+                                                  elevation: 5,
+                                                  hint: Text(
+                                                    'Yrs',
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                      fontFamily: 'Quicksand',
+                                                      fontSize: 22.0,
+                                                      letterSpacing: 2.0,
+                                                      color: Colors.white,
+                                                    ),
                                                   ),
-                                                ),
-                                                icon: Icon(Icons.arrow_drop_down),
-                                                value: _loanTermVal,
-                                                onChanged: (value) {
-                                                  setState(() {
-                                                    _loanTermVal = value;
-                                                  });
-                                                },
-                                                items: _loanTermList.map((value) {
-                                                  return DropdownMenuItem(
-                                                    value: value,
-                                                    child: Text(value),
-                                                  );
-                                                }).toList()
+                                                  icon: Icon(Icons.arrow_drop_down_rounded, color: Colors.white, size: 30.0,),
+                                                  value: _loanTermVal,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      _loanTermVal = value;
+                                                    });
+                                                  },
+                                                  items: _loanTermList.map((value) {
+                                                    return DropdownMenuItem(
+                                                      value: value,
+                                                      child: Text(
+                                                          value,
+                                                          style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontFamily: 'Quicksand',
+                                                            letterSpacing: 2.0,
+                                                            fontSize: 22.0,
+                                                          ),
+                                                      ),
+
+                                                    );
+                                                  }).toList()
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -257,7 +272,7 @@ class _HomeState extends State<Home> {
                                 child: Container(
                                   child: Column(
                                     children: [
-                                      Container(
+                                      Container(margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
                                         alignment: Alignment.bottomCenter,
                                         child: Text('Interest Rate',
                                           style: inputLabelStyle,
@@ -313,8 +328,7 @@ class _HomeState extends State<Home> {
                             style: inputLabelStyle,
                           ),
                         ),
-                        Neumorphic(
-                          margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
+                        Neumorphic(margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
                           style: neumorphicTextFieldStyle,
                           child: TextField(
                             style: textInputStyle,
@@ -333,8 +347,7 @@ class _HomeState extends State<Home> {
                               style: inputLabelStyle,
                             ),
                           ),
-                          Neumorphic(
-                            margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
+                          Neumorphic(margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
                             style: neumorphicTextFieldStyle,
                             child: TextField(
                                 style: textInputStyle,
@@ -354,8 +367,7 @@ class _HomeState extends State<Home> {
                               style: inputLabelStyle,
                             ),
                           ),
-                          Neumorphic(
-                            margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
+                          Neumorphic(margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
                             style: neumorphicTextFieldStyle,
                             child: TextField(
                                 style: textInputStyle,
@@ -375,8 +387,7 @@ class _HomeState extends State<Home> {
                               style: inputLabelStyle,
                             ),
                           ),
-                          Neumorphic(
-                            margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
+                          Neumorphic(margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
                             style: neumorphicTextFieldStyle,
                             child: TextField(
                                 style: textInputStyle,
@@ -396,8 +407,7 @@ class _HomeState extends State<Home> {
                               style: inputLabelStyle,
                             ),
                           ),
-                          Neumorphic(
-                            margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
+                          Neumorphic(margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
                             style: neumorphicTextFieldStyle,
                             child: TextField(
                                 style: textInputStyle,
@@ -411,14 +421,34 @@ class _HomeState extends State<Home> {
                                 decoration: textInputDecoration
                             ),
                           ),
+                          Container(
+                            alignment: Alignment.bottomLeft,
+                            child: Text('Vacancy',
+                              style: inputLabelStyle,
+                            ),
+                          ),
+                          Neumorphic(margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
+                            style: neumorphicTextFieldStyle,
+                            child: TextField(
+                                style: textInputStyle,
+                                textAlign: TextAlign.center,
+                                textAlignVertical: TextAlignVertical.bottom,
+                                controller: vacancyController,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: <TextInputFormatter>[
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                decoration: textInputDecoration
+                            ),
+                          ),
+
                         Container(
                           alignment: Alignment.bottomLeft,
                           child: Text('Monthly Rent',
                             style: inputLabelStyle,
                           ),
                         ),
-                        Neumorphic(
-                          margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
+                        Neumorphic(margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
                           style: neumorphicTextFieldStyle,
                           child: TextField(
                             style: textInputStyle,
@@ -436,193 +466,233 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ),
-              Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                            padding: MaterialStateProperty.all(EdgeInsets.fromLTRB(40.0, 2.0, 40.0, 2.0)),
-                            shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0))),
-                            backgroundColor: MaterialStateProperty.all(Colors.lightBlueAccent),
-                            elevation: MaterialStateProperty.all(5.0),
-                          ),
-                          onPressed: () {
-                            setState(() {
+              Expanded(
+                child: Neumorphic(
+                  style: neumorphicDisplayStyle,
+                  child: Container(margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                    decoration: BoxDecoration(
+                      //border: Border(top: BorderSide(color: Colors.lightBlueAccent, width: 4.0)),
+                    ),
+                    child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              child: ElevatedButton(
+                                style: ButtonStyle(
+                                  padding: MaterialStateProperty.all(EdgeInsets.fromLTRB(40.0, 2.0, 40.0, 2.0)),
+                                  shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0))),
+                                  backgroundColor: MaterialStateProperty.all(Colors.lightBlueAccent),
+                                  elevation: MaterialStateProperty.all(5.0),
+                                ),
+                                onPressed: () {
+                                  setState(() {
 
-                              _purchasePrice = double.parse(
-                                  purchasePriceController.text.replaceAll(',', '')
-                                      .replaceAll('\$', ''));
-                              print('_purchasePrice: ');
-                              print(_purchasePrice);
+                                    _purchasePrice = double.parse(
+                                        purchasePriceController.text.replaceAll(',', '')
+                                            .replaceAll('\$', ''));
+                                    print('_purchasePrice: ');
+                                    print(_purchasePrice);
 
-                              _downPayment = double.parse(
-                                  downPaymentController.text.replaceAll(',', '')
-                                      .replaceAll('%', ''));
-                              print('_downPayment: ');
-                              print(_downPayment);
+                                    _downPayment = double.parse(
+                                        downPaymentController.text.replaceAll(',', '')
+                                            .replaceAll('%', ''));
+                                    print('_downPayment: ');
+                                    print(_downPayment);
 
-                              _loanTerm = double.parse(
-                                _loanTermVal
-                              );
-                              _totalPayments = _loanTerm*12;
-                              print('_totalPayments');
-                              print(_totalPayments);
+                                    if (_loanTermVal != null) {
+                                      _loanTerm = double.parse(
+                                          _loanTermVal
+                                      );
+                                    }
+                                    else {
+                                      _loanTerm = 1;
+                                    }
+                                    print('laon term');
+                                    print(_loanTerm);
+
+                                      _totalPayments = _loanTerm * 12;
+
+                                    print('_totalPayments');
+                                    print(_totalPayments);
 
 
-                              _interestRate = double.parse(
-                                  interestRateController.text.replaceAll(',', '')
-                                      .replaceAll('%', ''));
-                              print('_interestRate: ');
-                              print(_interestRate);
+                                    _interestRate = double.parse(
+                                        interestRateController.text.replaceAll(',', '')
+                                            .replaceAll('%', ''));
+                                    print('_interestRate: ');
+                                    print(_interestRate);
 
-                              // Calculate Mortgage Payment
-                              //Monthly Payments = L[c(1 + c)^n]/[(1 + c)^n - 1]
-                              _downPaymentTotal = _purchasePrice*(_downPayment/100);
-                              _monthlyInterest = _interestRate/100/12;
-                              _mortgage = (_purchasePrice - _downPaymentTotal)*(_monthlyInterest*pow(1+_monthlyInterest, _totalPayments))/(pow((1+_monthlyInterest), _totalPayments)-1);
+                                    // Calculate Mortgage Payment
+                                    //Monthly Payments = L[c(1 + c)^n]/[(1 + c)^n - 1]
+                                    _downPaymentTotal = _purchasePrice*(_downPayment/100);
+                                    _monthlyInterest = _interestRate/100/12;
 
-                              //print(_mortgage);
-                              //print(_monthlyInterest);
-                              print('_mortgage');
-                              print(_mortgage);
 
-                              _closingCosts = double.parse(
-                                  closingCostsController.text.replaceAll(',', '')
-                                      .replaceAll('\$', ''));
+                                    _mortgage = (_purchasePrice - _downPaymentTotal)*(_monthlyInterest*pow(1+_monthlyInterest, _totalPayments))/(pow((1+_monthlyInterest), _totalPayments)-1);
 
-                              _repairs = double.parse(
-                                  repairsController.text.replaceAll(',', '')
-                                      .replaceAll('\$', ''));
+                                    //print(_mortgage);
+                                    //print(_monthlyInterest);
+                                    print('_mortgage');
+                                    print(_mortgage);
 
-                              _propertyTaxes = double.parse(
-                                  propertyTaxesController.text.replaceAll(',', '')
-                                      .replaceAll('\$', ''));
+                                    _closingCosts = double.parse(
+                                        closingCostsController.text.replaceAll(',', '')
+                                            .replaceAll('\$', ''));
 
-                              _insurance = double.parse(
-                                  insuranceController.text.replaceAll(',', '')
-                                      .replaceAll('\$', ''));
+                                    _repairs = double.parse(
+                                        repairsController.text.replaceAll(',', '')
+                                            .replaceAll('\$', ''));
 
-                              _capitalExpenditure = double.parse(
-                                  capitalExpenditureController.text.replaceAll(',', '')
-                                      .replaceAll('\$', ''));
+                                    _propertyTaxes = double.parse(
+                                        propertyTaxesController.text.replaceAll(',', '')
+                                            .replaceAll('\$', ''));
 
-                              _monthlyRent = double.parse(
-                                  monthlyRentController.text.replaceAll(',', '')
-                                      .replaceAll('\$', ''));
+                                    _insurance = double.parse(
+                                        insuranceController.text.replaceAll(',', '')
+                                            .replaceAll('\$', ''));
 
-                              if (_downPayment < 20) {
-                                _pMI = (_purchasePrice - _downPaymentTotal)*.01/12;
-                              }
-                              else {
-                                _pMI = 0;
-                              }
+                                    _capitalExpenditure = double.parse(
+                                        capitalExpenditureController.text.replaceAll(',', '')
+                                            .replaceAll('\$', ''));
 
-                              _monthlyPayment = _mortgage + _propertyTaxes + _insurance + _capitalExpenditure + _pMI;
-                              print('_monthlyPayment');
-                              print(_monthlyPayment);
-                              print(_pMI);
+                                    _monthlyRent = double.parse(
+                                        monthlyRentController.text.replaceAll(',', '')
+                                            .replaceAll('\$', ''));
 
-                              _cashFlow = _monthlyRent - _monthlyPayment;
-                              _cashFlow = double.parse((_cashFlow).toStringAsFixed(2));
-                              print(_cashFlow);
+                                    _vacancy = double.parse(
+                                        vacancyController.text.replaceAll(',', '')
+                                            .replaceAll('%', ''));
+                                    _vacancy = _vacancy/100;
+                                    print('vacacny');
+                                    print(_vacancy);
 
-                              _cashOnCashReturn = ((_cashFlow * 12) /
-                                  (_downPaymentTotal + _closingCosts + _repairs + _monthlyPayment * 12)) * 100;
-                              _cashOnCashReturn =
-                                  double.parse((_cashOnCashReturn).toStringAsFixed(2));
-                              print(_downPaymentTotal);
-                              print(_cashOnCashReturn);
-                              print('Monthly Payment');
-                              print(_monthlyPayment);
+                                    if (_downPayment < 20) {
+                                      _pMI = (_purchasePrice - _downPaymentTotal)*.01/12;
+                                    }
+                                    else {
+                                      _pMI = 0;
+                                    }
+                                    if (_downPayment == 100.0)
+                                      {
+                                        _monthlyPayment =
+                                            _propertyTaxes + _insurance +
+                                                _capitalExpenditure + _pMI +
+                                                (_monthlyRent * _vacancy);
+                                      }
+                                    else {
+                                      _monthlyPayment =
+                                          _mortgage + _propertyTaxes + _insurance +
+                                              _capitalExpenditure + _pMI +
+                                              (_monthlyRent * _vacancy);
+                                    }
+                                    print(_mortgage);
+                                    print(_propertyTaxes);
+                                    print(_insurance);
+                                    print(_capitalExpenditure);
+                                    print(_monthlyRent*_vacancy);
+                                    print('_monthlyPayment');
+                                    print(_monthlyPayment);
+                                    print(_pMI);
 
-                              _monthlyPayment = double.parse((_monthlyPayment).toStringAsFixed(2));
-                              print(_monthlyPayment);
-                            });
-                          },
-                          child: Text('Enter',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Quicksand',
-                              letterSpacing: 2.0,
-                              fontSize: 30.0,
+                                    _cashFlow = _monthlyRent - _monthlyPayment;
+                                    _cashFlow = double.parse((_cashFlow).toStringAsFixed(2));
+                                    print(_cashFlow);
 
+                                    _cashOnCashReturn = ((_cashFlow * 12) /
+                                        (_downPaymentTotal + _closingCosts + _repairs + _monthlyPayment * 12)) * 100;
+                                    _cashOnCashReturn =
+                                        double.parse((_cashOnCashReturn).toStringAsFixed(2));
+                                    print(_downPaymentTotal);
+                                    print(_cashOnCashReturn);
+                                    print('Monthly Payment');
+                                    print(_monthlyPayment);
+
+                                    _monthlyPayment = double.parse((_monthlyPayment).toStringAsFixed(2));
+                                    print(_monthlyPayment);
+                                  });
+                                },
+                                child: Text('Enter',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'Quicksand',
+                                    letterSpacing: 2.0,
+                                    fontSize: 30.0,
+
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
-                  Divider(
-                    color: Colors.lightBlue,
-                    thickness: 1.0,
-                  ),
-                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Monthly Payment:',
-                        style: TextStyle(
-                          fontSize: 22.0,
-                          color: Colors.lightBlueAccent,
-                          letterSpacing: 2.0,
-                          fontFamily: 'Quicksand',
+                        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Monthly Payment:',
+                              style: TextStyle(
+                                fontSize: 22.0,
+                                color: Colors.lightBlueAccent,
+                                letterSpacing: 2.0,
+                                fontFamily: 'Quicksand',
+                              ),
+                            ),
+                            new Text('\$' + '$_monthlyPayment',
+                              style: TextStyle(
+                                fontSize: 26.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.red,
+                                letterSpacing: 2.0,
+                                fontFamily: 'Quicksand',
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      new Text('\$' + '$_monthlyPayment',
-                        style: TextStyle(
-                          fontSize: 26.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.red,
-                          letterSpacing: 2.0,
-                          fontFamily: 'Quicksand',
+                        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Cash flow:',
+                              style: TextStyle(
+                                fontSize: 22.0,
+                                color: Colors.lightBlueAccent,
+                                letterSpacing: 2.0,
+                                fontFamily: 'Quicksand',
+                              ),
+                            ),
+                            new Text('\$' + '$_cashFlow',
+                              style: TextStyle(
+                                fontSize: 26.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.green,
+                                letterSpacing: 2.0,
+                                fontFamily: 'Quicksand',
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
-                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Cash flow:',
-                        style: TextStyle(
-                          fontSize: 22.0,
-                          color: Colors.lightBlueAccent,
-                          letterSpacing: 2.0,
-                          fontFamily: 'Quicksand',
-                        ),
-                      ),
-                      new Text('\$' + '$_cashFlow',
-                        style: TextStyle(
-                          fontSize: 26.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.green,
-                          letterSpacing: 2.0,
-                          fontFamily: 'Quicksand',
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Cash on cash return:',
-                        style: TextStyle(
-                          fontSize: 22.0,
-                          color: Colors.lightBlueAccent,
-                          letterSpacing: 2.0,
-                          fontFamily: 'Quicksand',
-                        ),
-                      ),
-                      new Text('$_cashOnCashReturn' + '%',
-                        style: TextStyle(
-                          fontSize: 26.0,
-                          color: Colors.green,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 2.0,
-                          fontFamily: 'Quicksand',
-                        ),
-                      ),
+                        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Cash on cash return:',
+                              style: TextStyle(
+                                fontSize: 22.0,
+                                color: Colors.lightBlueAccent,
+                                letterSpacing: 2.0,
+                                fontFamily: 'Quicksand',
+                              ),
+                            ),
+                            new Text('$_cashOnCashReturn' + '%',
+                              style: TextStyle(
+                                fontSize: 26.0,
+                                color: Colors.green,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 2.0,
+                                fontFamily: 'Quicksand',
+                              ),
+                            ),
 
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ],
+                ),
               ),
             ],
           ),

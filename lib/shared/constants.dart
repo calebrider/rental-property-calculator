@@ -38,3 +38,25 @@ final neumorphicTextFieldStyle = NeumorphicStyle(
   color: Colors.white,
   intensity: 0.60,
 );
+
+final neumorphicDropdownButtonStyle = NeumorphicStyle(
+  boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(100.0)),
+  depth: 5,
+  shadowDarkColor: Colors.lightBlueAccent,
+  color: Colors.lightBlueAccent,
+  intensity: 0.60,
+);
+
+final neumorphicDisplayStyle = NeumorphicStyle(
+  depth: 10,
+  color: Colors.white,
+  shadowLightColor: Colors.lightBlueAccent,
+  intensity: 0.6,
+  disableDepth: false,
+  shape: NeumorphicShape.convex,
+  border: NeumorphicBorder(
+    width: 2,
+    //isEnabled: true,
+    color: Colors.lightBlueAccent,
+  ),
+);
