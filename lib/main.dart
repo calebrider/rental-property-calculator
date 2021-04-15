@@ -104,8 +104,7 @@ class _HomeState extends State<Home> {
           backgroundColor: Colors.lightBlueAccent,
 
         ),
-        body: Padding(padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
-          child: Column(
+        body: Column(
             children: [
               Row(mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -123,8 +122,7 @@ class _HomeState extends State<Home> {
                 color: Colors.lightBlueAccent,
                 thickness: 1.0,
               ),
-                LimitedBox(
-                  maxHeight: 300,
+                Expanded(
                   child: SingleChildScrollView(
                     child: SliderTheme(
                       data: SliderThemeData(
@@ -466,14 +464,15 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ),
-              Expanded(
+              Container(
                 child: Neumorphic(
                   style: neumorphicDisplayStyle,
                   child: Container(margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
                     decoration: BoxDecoration(
                       //border: Border(top: BorderSide(color: Colors.lightBlueAccent, width: 4.0)),
                     ),
-                    child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                    child: Column(mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Row(
                           children: [
@@ -696,7 +695,6 @@ class _HomeState extends State<Home> {
               ),
             ],
           ),
-        ),
       ),
     );
   }
