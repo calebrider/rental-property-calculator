@@ -102,7 +102,6 @@ class _HomeState extends State<Home> {
           ),
           centerTitle: true,
           backgroundColor: Colors.lightBlueAccent,
-
         ),
         body: Column(
             children: [
@@ -695,6 +694,34 @@ class _HomeState extends State<Home> {
               ),
             ],
           ),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.lightBlueAccent,
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.white.withOpacity(0.6),
+          selectedFontSize: 18.0,
+          unselectedFontSize: 14.0,
+
+          items: [
+            BottomNavigationBarItem(
+              label: 'Login',
+              icon: Icon(Icons.person),
+            ),
+            BottomNavigationBarItem(
+              label: 'Criteria',
+              icon: Icon(Icons.assignment),
+            ),
+            BottomNavigationBarItem(
+              label: 'Calculator',
+              icon: Icon(Icons.post_add_rounded),
+            ),
+
+            BottomNavigationBarItem(
+              label: 'Property List',
+              icon: Icon(Icons.house),
+            ),
+          ],
+        ),
       ),
     );
   }
