@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:real_estate_app/pages/tab_navigation.dart';
 
-var lightGreenColor = Color(0xFF44CF6C);
-var greenColor = Color(0xFF24AA00);
-var darkGreenColor = Color(0xFF00551F);
+var lightBlueBackground = const Color(0xFFf5fdff);
 
-var drabGreen = Color(0xFFAEC3B0);
-
-var creamBlue = Color(0xFFEFFFFA);
-var oceanBlue = Color(0xFF78D5D7);
-var blue = Color(0xFF6A55FF);
 
 
 class LoginPage extends StatelessWidget {
@@ -23,10 +16,10 @@ class LoginPage extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            stops: [0.0, 0.5, 0.9],
+            stops: [0.0, 0.7, 0.9],
             colors: [
-              darkGreenColor,
-              greenColor,
+              Colors.lightBlueAccent,
+              lightBlueBackground,
               //lightGreenColor,
               Colors.white,
             ],
@@ -43,10 +36,10 @@ class LoginPage extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white,
               shape: BoxShape.circle,
-              image: DecorationImage(
-                fit: BoxFit.fill,
-                image: new AssetImage('assets/images/Plane_Logo_Colored.png'),
-              ),
+              // image: DecorationImage(
+              //   fit: BoxFit.fill,
+              //   image: new AssetImage('assets/images/Plane_Logo_Colored.png'),
+              // ),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.4),
@@ -61,7 +54,7 @@ class LoginPage extends StatelessWidget {
             ),
           ),
           Padding(padding: EdgeInsets.all(10.0)),
-          Text("Test App Login.", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,),),
+          Text("Real Estate Calculator Login.", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,),),
           /*
         Center(
           child: Container(
@@ -131,8 +124,8 @@ class LoginPage extends StatelessWidget {
           Column(children: <Widget>[
             Container(
               padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-              child: FlatButton(
-                child: Text("Forgot Password?", style: TextStyle(fontWeight: FontWeight.bold, color: darkGreenColor),),
+              child: TextButton(
+                child: Text("Forgot Password?", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.lightBlueAccent),),
                 onPressed: () {
                   Navigator.push(
                       context,
@@ -141,8 +134,8 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             Container(
-              child: FlatButton(
-                child: Text("Don't Have an Account?", style: TextStyle(fontWeight: FontWeight.bold, color: darkGreenColor),),
+              child: TextButton(
+                child: Text("Don't Have an Account?", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.lightBlueAccent),),
               ),
             ),
           ],
@@ -153,7 +146,7 @@ class LoginPage extends StatelessWidget {
           new RaisedButton(
             elevation: 10,
             padding: const EdgeInsets.fromLTRB(60, 10, 60, 10),
-            color: greenColor,
+            color: Colors.lightBlueAccent,
             textColor: Colors.white,
             child: Text("Login", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             shape: RoundedRectangleBorder(

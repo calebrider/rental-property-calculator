@@ -15,8 +15,8 @@ class _TabNavigationState extends State<TabNavigationPage> {
   int _selectedPage = 0;
   final _pageOptions = [
     LoginPage(),
-    //CriteriaPage(),
-    //CalculatorPage(),
+    CriteriaPage(),
+    CalculatorPage(),
     PropertyListPage(),
   ];
 
@@ -48,20 +48,26 @@ class _TabNavigationState extends State<TabNavigationPage> {
         selectedFontSize: 18.0,
         unselectedFontSize: 14.0,
 
+        currentIndex: _selectedPage,
+        onTap: (int index) {
+          setState(() {
+            _selectedPage = index;
+          });
+        },
+
         items: [
           BottomNavigationBarItem(
             label: 'Login',
             icon: Icon(Icons.person),
           ),
-          BottomNavigationBarItem(
-            label: 'Criteria',
-            icon: Icon(Icons.assignment),
-          ),
-          BottomNavigationBarItem(
-            label: 'Calculator',
-            icon: Icon(Icons.post_add_rounded),
-          ),
-
+           BottomNavigationBarItem(
+             label: 'Criteria',
+             icon: Icon(Icons.assignment),
+           ),
+           BottomNavigationBarItem(
+             label: 'Calculator',
+             icon: Icon(Icons.post_add_rounded),
+           ),
           BottomNavigationBarItem(
             label: 'Property List',
             icon: Icon(Icons.house),

@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:real_estate_app/pages/tab_navigation.dart';
+
+
+var lightBlueBackground = const Color(0xFFf5fdff);
+
 
 
 class PropertyListPage extends StatelessWidget {
@@ -6,9 +11,19 @@ class PropertyListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false, //prevents gradient from sliding up with keyboard
+      //backgroundColor: lightBlueBackground,
       appBar: AppBar(
-        title: Text("Home"),
-        backgroundColor: Colors.blueGrey,
+        elevation: 0.0,
+        title: Text('Property List',
+          style: TextStyle(
+            fontFamily: 'Quicksand',
+            //fontWeight: FontWeight.bold,
+            fontSize: 24.0,
+            letterSpacing: 2.0,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.lightBlueAccent,
       ),
       body: Container(
         //color: Colors.white,
@@ -16,10 +31,12 @@ class PropertyListPage extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            stops: [0.4, 1],
+            stops: [0.0, 0.7, 0.9],
             colors: [
+              Colors.lightBlueAccent,
+              lightBlueBackground,
+              //lightGreenColor,
               Colors.white,
-              Colors.blueGrey,
             ],
           ),
         ),
