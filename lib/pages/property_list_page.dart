@@ -31,7 +31,7 @@ class PropertyListPage extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            stops: [0.0, 0.7, 0.9],
+            stops: [0.0, 0.9, 1],
             colors: [
               Colors.lightBlueAccent,
               lightBlueBackground,
@@ -44,6 +44,9 @@ class PropertyListPage extends StatelessWidget {
     );
   }
 }
+
+
+
 /*
 //var index = 0;
 
