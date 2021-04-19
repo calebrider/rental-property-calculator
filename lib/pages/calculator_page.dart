@@ -22,7 +22,8 @@ class CalculatorPage extends StatefulWidget {
 class _HomeState extends State<CalculatorPage> {
 
   var lightBlueBackground = const Color(0xFFf5fdff);
-  double _displayHeight = 70;
+  bool hiddenMetrics = true;
+  double metricsHeight = 0;
 
   var _loanTerm;
   String _loanTermVal;
@@ -109,7 +110,7 @@ class _HomeState extends State<CalculatorPage> {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              stops: [0.0, 0.9, 1],
+              stops: [0.0, 0.95, 1],
               colors: [
                 Colors.lightBlueAccent,
                 lightBlueBackground,
@@ -169,8 +170,8 @@ class _HomeState extends State<CalculatorPage> {
                           min: 0,
                           max: 1000000,
                           divisions: 100,
-                          activeColor: Colors.lightBlueAccent,
-                          inactiveColor: Colors.grey[300],
+                          activeColor: Colors.lightBlue,
+                          inactiveColor: Colors.grey[600],
                           //label: downPaymentSliderValue.round().toString(),
 
                           //onChanged: (downPaymentSliderValue) => setState(() => this.downPaymentSliderValue = downPaymentSliderValue),
@@ -209,7 +210,7 @@ class _HomeState extends State<CalculatorPage> {
                           max: 100,
                           divisions: 100,
                           activeColor: Colors.lightBlueAccent,
-                          inactiveColor: Colors.grey[300],
+                          inactiveColor: Colors.grey[600],
                           //label: downPaymentSliderValue.round().toString(),
 
                           //onChanged: (downPaymentSliderValue) => setState(() => this.downPaymentSliderValue = downPaymentSliderValue),
@@ -311,8 +312,8 @@ class _HomeState extends State<CalculatorPage> {
                                           min: 0,
                                           max: 5,
                                           divisions: 100,
-                                          activeColor: Colors.lightBlueAccent,
-                                          inactiveColor: Colors.grey[300],
+                                          activeColor: Colors.lightBlue,
+                                          inactiveColor: Colors.grey[600],
                                           //label: downPaymentSliderValue.round().toString(),
 
                                           //onChanged: (downPaymentSliderValue) => setState(() => this.downPaymentSliderValue = downPaymentSliderValue),
@@ -479,9 +480,8 @@ class _HomeState extends State<CalculatorPage> {
                 ),
               ),
               AnimatedContainer(
-                height: _displayHeight,
                 // Define how long the animation should take.
-                duration: Duration(seconds: 1),
+                duration: Duration(seconds: 2),
                 // Provide an optional curve to make the animation feel smoother.
                 curve: Curves.fastOutSlowIn,
                 child: Neumorphic(
@@ -505,7 +505,8 @@ class _HomeState extends State<CalculatorPage> {
                                 ),
                                 onPressed: () {
                                   setState(() {
-                                    _displayHeight = 170;
+                                    hiddenMetrics = false;
+                                    metricsHeight = 150;
 
                                     _purchasePrice = double.parse(
                                         purchasePriceController.text.replaceAll(',', '')
@@ -645,69 +646,83 @@ class _HomeState extends State<CalculatorPage> {
                           ],
                         ),
                         Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 10.0)),
-                        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text('Monthly Payment:',
-                              style: TextStyle(
-                                fontSize: 22.0,
-                                color: Colors.lightBlueAccent,
-                                letterSpacing: 2.0,
-                                fontFamily: 'Quicksand',
-                              ),
-                            ),
-                            new Text('\$' + '$_monthlyPayment',
-                              style: TextStyle(
-                                fontSize: 26.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.red,
-                                letterSpacing: 2.0,
-                                fontFamily: 'Quicksand',
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text('Cash flow:',
-                              style: TextStyle(
-                                fontSize: 22.0,
-                                color: Colors.lightBlueAccent,
-                                letterSpacing: 2.0,
-                                fontFamily: 'Quicksand',
-                              ),
-                            ),
-                            new Text('\$' + '$_cashFlow',
-                              style: TextStyle(
-                                fontSize: 26.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.green,
-                                letterSpacing: 2.0,
-                                fontFamily: 'Quicksand',
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text('Cash on cash return:',
-                              style: TextStyle(
-                                fontSize: 22.0,
-                                color: Colors.lightBlueAccent,
-                                letterSpacing: 2.0,
-                                fontFamily: 'Quicksand',
-                              ),
-                            ),
-                            new Text('$_cashOnCashReturn' + '%',
-                              style: TextStyle(
-                                fontSize: 26.0,
-                                color: Colors.green,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 2.0,
-                                fontFamily: 'Quicksand',
-                              ),
-                            ),
+                        AnimatedContainer(
+                          height: metricsHeight,
+                          // Define how long the animation should take.
+                          duration: Duration(seconds: 1),
+                          // Provide an optional curve to make the animation feel smoother.
+                          curve: Curves.fastOutSlowIn,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('Monthly Payment:',
+                                      style: TextStyle(
+                                        fontSize: 22.0,
+                                        color: Colors.lightBlueAccent,
+                                        letterSpacing: 2.0,
+                                        fontFamily: 'Quicksand',
+                                      ),
+                                    ),
+                                    new Text('\$' + '$_monthlyPayment',
+                                      style: TextStyle(
+                                        fontSize: 26.0,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.red,
+                                        letterSpacing: 2.0,
+                                        fontFamily: 'Quicksand',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('Cash flow:',
+                                      style: TextStyle(
+                                        fontSize: 22.0,
+                                        color: Colors.lightBlueAccent,
+                                        letterSpacing: 2.0,
+                                        fontFamily: 'Quicksand',
+                                      ),
+                                    ),
+                                    new Text('\$' + '$_cashFlow',
+                                      style: TextStyle(
+                                        fontSize: 26.0,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.green,
+                                        letterSpacing: 2.0,
+                                        fontFamily: 'Quicksand',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('Cash on cash return:',
+                                      style: TextStyle(
+                                        fontSize: 22.0,
+                                        color: Colors.lightBlueAccent,
+                                        letterSpacing: 2.0,
+                                        fontFamily: 'Quicksand',
+                                      ),
+                                    ),
+                                    new Text('$_cashOnCashReturn' + '%',
+                                      style: TextStyle(
+                                        fontSize: 26.0,
+                                        color: Colors.green,
+                                        fontWeight: FontWeight.bold,
+                                        letterSpacing: 2.0,
+                                        fontFamily: 'Quicksand',
+                                      ),
+                                    ),
+    
+                                  ],
+                                ),
 
-                          ],
+                              ],
+                            ),
+                          ),
                         ),
                       ],
                     ),

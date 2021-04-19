@@ -31,7 +31,7 @@ class CriteriaPage extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            stops: [0.0, 0.9, 1],
+            stops: [0.0, 0.95, 1],
             colors: [
               Colors.lightBlueAccent,
               lightBlueBackground,

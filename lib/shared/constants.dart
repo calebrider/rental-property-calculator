@@ -5,6 +5,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 var textInputDecoration = InputDecoration(
   fillColor: Colors.transparent,
   filled: true,
+  border: InputBorder.none,
   enabledBorder: OutlineInputBorder(
     borderSide: BorderSide(color: Colors.transparent, width: 1.0),
       borderRadius: const BorderRadius.all(const Radius.circular(100.0))
@@ -16,19 +17,19 @@ var textInputDecoration = InputDecoration(
 
 );
 
-const textInputStyle = TextStyle(
+final textInputStyle = TextStyle(
   height: 0.6,
-  color: Colors.grey,
+  color: Colors.grey[600],
   fontFamily: 'Quicksand',
   fontSize: 22.0,
   letterSpacing: 2.0,
 );
 
-const inputLabelStyle = TextStyle(
+final inputLabelStyle = TextStyle(
       fontFamily: 'Quicksand',
       fontSize: 18.0,
       letterSpacing: 2.0,
-      color: Colors.grey,
+      color: Colors.grey[600],
 );
 
 final neumorphicTextFieldStyle = NeumorphicStyle(
