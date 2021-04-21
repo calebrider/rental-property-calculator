@@ -40,6 +40,22 @@ class CriteriaPage extends StatelessWidget {
             ],
           ),
         ),
+        child: Column(
+          children: [
+            Row(mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Enter your property criteria below:',
+                  style: TextStyle(
+                    fontFamily: 'Quicksand',
+                    fontSize: 20.0,
+                    letterSpacing: 1.5,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

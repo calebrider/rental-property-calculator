@@ -1,11 +1,13 @@
  import 'package:flutter/material.dart';
+import 'package:real_estate_app/shared/reveal_animation.dart';
  import './pages/login_page.dart';
 
 //
 //
  void main() => runApp(MaterialApp(
    debugShowCheckedModeBanner: false,
-   home: new LoginPage(),
+   //home: new LoginPage(),
+   home: new AnimatePage(),
  ));
 
 // import 'dart:math';

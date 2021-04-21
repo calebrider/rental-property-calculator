@@ -33,7 +33,6 @@ class _LoginState extends State<LoginPage> {
           _imageWidth = 150;
           _imageHeight = 150;
           _loginCredentialHeight = 200;
-
         }));
 
 

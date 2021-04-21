@@ -6,7 +6,12 @@ var lightBlueBackground = const Color(0xFFf5fdff);
 
 
 
-class PropertyListPage extends StatelessWidget {
+class PropertyListPage extends StatefulWidget {
+  @override
+  _PropertyListPageState createState() => _PropertyListPageState();
+}
+
+class _PropertyListPageState extends State<PropertyListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
