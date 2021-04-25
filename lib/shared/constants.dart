@@ -44,7 +44,7 @@ final neumorphicDropdownButtonStyle = NeumorphicStyle(
   boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(100.0)),
   depth: 5,
   shadowDarkColor: Colors.lightBlueAccent,
-  color: Colors.lightBlueAccent,
+  color: Colors.lightBlue,
   intensity: 0.60,
 );
 

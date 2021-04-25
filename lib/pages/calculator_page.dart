@@ -19,7 +19,32 @@ class CalculatorPage extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<CalculatorPage> {
+class _HomeState extends State<CalculatorPage> with SingleTickerProviderStateMixin{
+  AnimationController _animationController;
+  Animation _colorAnimation;
+  Animation _heightAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _animationController = AnimationController(
+        duration: Duration(seconds: 1),
+        vsync: this
+    );
+
+    _colorAnimation = ColorTween(begin: Colors.grey[400], end: Colors.lightBlueAccent).animate(new CurvedAnimation(parent: _animationController, curve: Curves.fastOutSlowIn));
+    _heightAnimation = Tween<double>(begin: 10, end: 200).animate(new CurvedAnimation(parent: _animationController, curve: Curves.elasticOut));
+
+    _animationController.forward();
+
+    _animationController.addListener(() {
+      print(_animationController.value);
+      print(_colorAnimation.value);
+      print(_heightAnimation.value);
+    });
+  }
+
 
   var lightBlueBackground = const Color(0xFFf5fdff);
   bool hiddenMetrics = true;
@@ -86,6 +111,8 @@ class _HomeState extends State<CalculatorPage> {
 
   var _cashFlow = 0.0;
   var _cashOnCashReturn = 0.0;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -184,6 +211,7 @@ class _HomeState extends State<CalculatorPage> {
                           },
 
                         ),
+                        Padding(padding: EdgeInsets.all(10.0)),
                         Container(
                           alignment: Alignment.bottomLeft,
                           child: Text('Down Payment',
@@ -209,7 +237,7 @@ class _HomeState extends State<CalculatorPage> {
                           min: 0,
                           max: 100,
                           divisions: 100,
-                          activeColor: Colors.lightBlueAccent,
+                          activeColor: Colors.lightBlue,
                           inactiveColor: Colors.grey[600],
                           //label: downPaymentSliderValue.round().toString(),
 
@@ -222,6 +250,7 @@ class _HomeState extends State<CalculatorPage> {
                             });
                           },
                         ),
+                        Padding(padding: EdgeInsets.all(10.0)),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -239,7 +268,7 @@ class _HomeState extends State<CalculatorPage> {
                                       padding: const EdgeInsets.fromLTRB(30.0, 3, 30.0, 3),
                                       child: DropdownButtonHideUnderline(
                                         child: DropdownButton(
-                                            dropdownColor: Colors.lightBlueAccent,
+                                            dropdownColor: Colors.lightBlue,
                                             elevation: 5,
                                             hint: Text(
                                               'Yrs',
@@ -334,7 +363,7 @@ class _HomeState extends State<CalculatorPage> {
                             ),
                           ],
                         ),
-
+                        Padding(padding: EdgeInsets.all(10.0)),
                         Container(
                           alignment: Alignment.bottomLeft,
                           child: Text('Closing Costs',
@@ -354,6 +383,8 @@ class _HomeState extends State<CalculatorPage> {
                               decoration: textInputDecoration
                           ),
                         ),
+                        Padding(padding: EdgeInsets.all(10.0)),
+
                         Container(
                           alignment: Alignment.bottomLeft,
                           child: Text('Repairs',
@@ -374,6 +405,8 @@ class _HomeState extends State<CalculatorPage> {
                               decoration: textInputDecoration
                           ),
                         ),
+                        Padding(padding: EdgeInsets.all(10.0)),
+
                         Container(
                           alignment: Alignment.bottomLeft,
                           child: Text('Property Taxes',
@@ -394,6 +427,8 @@ class _HomeState extends State<CalculatorPage> {
                               decoration: textInputDecoration
                           ),
                         ),
+                        Padding(padding: EdgeInsets.all(10.0)),
+
                         Container(
                           alignment: Alignment.bottomLeft,
                           child: Text('Insurance',
@@ -414,6 +449,8 @@ class _HomeState extends State<CalculatorPage> {
                               decoration: textInputDecoration
                           ),
                         ),
+                        Padding(padding: EdgeInsets.all(10.0)),
+
                         Container(
                           alignment: Alignment.bottomLeft,
                           child: Text('Capital Expenditure',
@@ -434,6 +471,8 @@ class _HomeState extends State<CalculatorPage> {
                               decoration: textInputDecoration
                           ),
                         ),
+                        Padding(padding: EdgeInsets.all(10.0)),
+
                         Container(
                           alignment: Alignment.bottomLeft,
                           child: Text('Vacancy',
@@ -454,6 +493,7 @@ class _HomeState extends State<CalculatorPage> {
                               decoration: textInputDecoration
                           ),
                         ),
+                        Padding(padding: EdgeInsets.all(10.0)),
 
                         Container(
                           alignment: Alignment.bottomLeft,
@@ -474,6 +514,8 @@ class _HomeState extends State<CalculatorPage> {
                               decoration: textInputDecoration
                           ),
                         ),
+                        Padding(padding: EdgeInsets.all(10.0)),
+
                       ],
                     ),
                   ),
@@ -500,13 +542,13 @@ class _HomeState extends State<CalculatorPage> {
                                 style: ButtonStyle(
                                   padding: MaterialStateProperty.all(EdgeInsets.fromLTRB(40.0, 2.0, 40.0, 2.0)),
                                   shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0))),
-                                  backgroundColor: MaterialStateProperty.all(Colors.lightBlueAccent),
+                                  backgroundColor: MaterialStateProperty.all(Colors.lightBlue),
                                   elevation: MaterialStateProperty.all(5.0),
                                 ),
                                 onPressed: () {
                                   setState(() {
                                     hiddenMetrics = false;
-                                    metricsHeight = 150;
+                                    metricsHeight = 160;
 
                                     _purchasePrice = double.parse(
                                         purchasePriceController.text.replaceAll(',', '')
@@ -637,7 +679,7 @@ class _HomeState extends State<CalculatorPage> {
                                     color: Colors.white,
                                     fontFamily: 'Quicksand',
                                     letterSpacing: 2.0,
-                                    fontSize: 30.0,
+                                    fontSize: 22.0,
 
                                   ),
                                 ),
@@ -649,76 +691,126 @@ class _HomeState extends State<CalculatorPage> {
                         AnimatedContainer(
                           height: metricsHeight,
                           // Define how long the animation should take.
-                          duration: Duration(seconds: 1),
+                          duration: Duration(milliseconds: 500),
                           // Provide an optional curve to make the animation feel smoother.
                           curve: Curves.fastOutSlowIn,
                           child: SingleChildScrollView(
-                            child: Column(
+                            child: Column(mainAxisSize: MainAxisSize.min,
                               children: [
-                                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                Flexible(
+                                  flex: 1,
+                                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('Monthly Payment:',
+                                        style: TextStyle(
+                                          fontSize: 22.0,
+                                          color: Colors.lightBlueAccent,
+                                          letterSpacing: 2.0,
+                                          fontFamily: 'Quicksand',
+                                        ),
+                                      ),
+                                      new Text('\$' + '$_monthlyPayment',
+                                        style: TextStyle(
+                                          fontSize: 26.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.red,
+                                          letterSpacing: 2.0,
+                                          fontFamily: 'Quicksand',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Flexible(
+                                  flex: 1,
+                                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('Cash flow:',
+                                        style: TextStyle(
+                                          fontSize: 22.0,
+                                          color: Colors.lightBlueAccent,
+                                          letterSpacing: 2.0,
+                                          fontFamily: 'Quicksand',
+                                        ),
+                                      ),
+                                      new Text('\$' + '$_cashFlow',
+                                        style: TextStyle(
+                                          fontSize: 26.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.green,
+                                          letterSpacing: 2.0,
+                                          fontFamily: 'Quicksand',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Flexible(
+                                  flex: 1,
+                                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('Cash on cash return:',
+                                        style: TextStyle(
+                                          fontSize: 22.0,
+                                          color: Colors.lightBlueAccent,
+                                          letterSpacing: 2.0,
+                                          fontFamily: 'Quicksand',
+                                        ),
+                                      ),
+                                      new Text('$_cashOnCashReturn' + '%',
+                                        style: TextStyle(
+                                          fontSize: 26.0,
+                                          color: Colors.green,
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 2.0,
+                                          fontFamily: 'Quicksand',
+                                        ),
+                                      ),
+
+                                    ],
+                                  ),
+                                ),
+                              Flexible(
+                                flex: 1,
+                                child: Row(
                                   children: [
-                                    Text('Monthly Payment:',
-                                      style: TextStyle(
-                                        fontSize: 22.0,
-                                        color: Colors.lightBlueAccent,
-                                        letterSpacing: 2.0,
-                                        fontFamily: 'Quicksand',
+                                    Expanded(
+                                      child: ElevatedButton(
+                                      style: ButtonStyle(
+                                        padding: MaterialStateProperty.all(EdgeInsets.fromLTRB(40.0, 2.0, 40.0, 2.0)),
+                                        shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0))),
+                                        backgroundColor: MaterialStateProperty.all(Colors.lightBlue),
+                                        elevation: MaterialStateProperty.all(5.0),
                                       ),
+                                      onPressed: () {
+                                        setState(() {
+
+                                            });
+                                          },
+                                        child: Text('Save to List',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Quicksand',
+                                          letterSpacing: 2.0,
+                                          fontSize: 22.0,
+
+                                        ),
+                                      ),
+                                        ),
                                     ),
-                                    new Text('\$' + '$_monthlyPayment',
-                                      style: TextStyle(
-                                        fontSize: 26.0,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.red,
-                                        letterSpacing: 2.0,
-                                        fontFamily: 'Quicksand',
-                                      ),
+                                    IconButton(
+                                      icon: const Icon(Icons.keyboard_arrow_down_rounded),
+                                      color: Colors.lightBlue,
+                                      onPressed: () {
+                                        setState(() {
+                                          hiddenMetrics = true;
+                                          metricsHeight = 0;
+                                        });
+                                      },
                                     ),
                                   ],
                                 ),
-                                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text('Cash flow:',
-                                      style: TextStyle(
-                                        fontSize: 22.0,
-                                        color: Colors.lightBlueAccent,
-                                        letterSpacing: 2.0,
-                                        fontFamily: 'Quicksand',
-                                      ),
-                                    ),
-                                    new Text('\$' + '$_cashFlow',
-                                      style: TextStyle(
-                                        fontSize: 26.0,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.green,
-                                        letterSpacing: 2.0,
-                                        fontFamily: 'Quicksand',
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text('Cash on cash return:',
-                                      style: TextStyle(
-                                        fontSize: 22.0,
-                                        color: Colors.lightBlueAccent,
-                                        letterSpacing: 2.0,
-                                        fontFamily: 'Quicksand',
-                                      ),
-                                    ),
-                                    new Text('$_cashOnCashReturn' + '%',
-                                      style: TextStyle(
-                                        fontSize: 26.0,
-                                        color: Colors.green,
-                                        fontWeight: FontWeight.bold,
-                                        letterSpacing: 2.0,
-                                        fontFamily: 'Quicksand',
-                                      ),
-                                    ),
-    
-                                  ],
-                                ),
+                              ),
 
                               ],
                             ),

@@ -6,8 +6,8 @@ import 'package:real_estate_app/shared/reveal_animation.dart';
 //
  void main() => runApp(MaterialApp(
    debugShowCheckedModeBanner: false,
-   //home: new LoginPage(),
-   home: new AnimatePage(),
+   home: new LoginPage(),
+   //home: new AnimatePage(),
  ));
 
 // import 'dart:math';
