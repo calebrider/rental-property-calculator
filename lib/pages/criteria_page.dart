@@ -1,12 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:real_estate_app/pages/tab_navigation.dart';
+import 'package:flutter/services.dart';
+import 'package:real_estate_app/shared/constants.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+
 
 
 var lightBlueBackground = const Color(0xFFf5fdff);
 
 
 
-class CriteriaPage extends StatelessWidget {
+class CriteriaPage extends StatefulWidget {
+  @override
+  _CriteriaPageState createState() => _CriteriaPageState();
+}
+
+class _CriteriaPageState extends State<CriteriaPage> {
+
+  var cashOnCashCriteriaController = MoneyMaskedTextController(
+      decimalSeparator: '.', thousandSeparator: ',', rightSymbol: '%');
+  var _cashOnCashCriteria;
+  double cashOnCashCriteriaSliderValue = 0;
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,6 +72,47 @@ class CriteriaPage extends StatelessWidget {
                 ),
               ],
             ),
+            Padding(padding: EdgeInsets.all(20.0),),
+            Container(
+              alignment: Alignment.bottomLeft,
+              child: Text('Minimum Cash on Cash Return',
+                style: inputLabelStyle,
+              ),
+            ),
+            Neumorphic(margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
+              style: neumorphicTextFieldStyle,
+              child: TextField(
+                  style: textInputStyle,
+                  textAlign: TextAlign.center,
+                  textAlignVertical: TextAlignVertical.bottom,
+                  controller: cashOnCashCriteriaController,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
+                  decoration: textInputDecoration
+              ),
+            ),
+            Slider(
+              value: cashOnCashCriteriaSliderValue,
+              min: 0,
+              max: 1000000,
+              divisions: 100,
+              activeColor: Colors.lightBlue,
+              inactiveColor: Colors.grey[600],
+              //label: downPaymentSliderValue.round().toString(),
+
+              //onChanged: (downPaymentSliderValue) => setState(() => this.downPaymentSliderValue = downPaymentSliderValue),
+              //onChangeEnd: (downPaymentSliderValue) => setState(() => downPaymentController.text = downPaymentSliderValue.toString()),
+              onChanged: (double purchasePriceSliderValue) {
+                setState(() {
+                  this.cashOnCashCriteriaSliderValue = purchasePriceSliderValue;
+                  cashOnCashCriteriaController.text = (purchasePriceSliderValue*10).toString();
+                });
+              },
+
+            ),
+            Padding(padding: EdgeInsets.all(10.0)),
           ],
         ),
       ),

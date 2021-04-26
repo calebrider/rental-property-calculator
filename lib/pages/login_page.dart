@@ -28,7 +28,7 @@ class _LoginState extends State<LoginPage> {
   Widget build(BuildContext context) {
 
     if (mounted)
-    Future.delayed(Duration(seconds: 1)).then((value) =>
+    Future.delayed(Duration(milliseconds: 100)).then((value) =>
         setState(() {
           _imageWidth = 150;
           _imageHeight = 150;
@@ -205,18 +205,18 @@ class _LoginState extends State<LoginPage> {
                 padding: EdgeInsets.all(10.0),
               ),
               new ElevatedButton(
-                  style: ButtonStyle(
-                    padding: MaterialStateProperty.all(EdgeInsets.fromLTRB(40.0, 2.0, 40.0, 2.0)),
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0))),
-                    backgroundColor: MaterialStateProperty.all(_buttonColor),
-                    elevation: MaterialStateProperty.all(5.0),
-                  ),
-                child: Text("Login",
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(EdgeInsets.fromLTRB(40.0, 2.0, 40.0, 2.0)),
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0))),
+                  backgroundColor: MaterialStateProperty.all(Colors.lightBlue),
+                  elevation: MaterialStateProperty.all(5.0),
+                ),
+                child: Text('Login',
                   style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'Quicksand',
                     letterSpacing: 2.0,
-                    fontSize: 26.0,
+                    fontSize: 22.0,
 
                   ),
                 ),
