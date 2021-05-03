@@ -211,13 +211,15 @@ class _LoginState extends State<LoginPage> {
                   backgroundColor: MaterialStateProperty.all(Colors.lightBlue),
                   elevation: MaterialStateProperty.all(5.0),
                 ),
-                child: Text('Login',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'Quicksand',
-                    letterSpacing: 2.0,
-                    fontSize: 22.0,
+                child: Container(
+                  child: Text('Login',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Quicksand',
+                      letterSpacing: 2.0,
+                      fontSize: 22.0,
 
+                    ),
                   ),
                 ),
 

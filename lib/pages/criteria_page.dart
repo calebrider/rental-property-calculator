@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:real_estate_app/pages/tab_navigation.dart';
 import 'package:flutter/services.dart';
@@ -17,6 +18,11 @@ class CriteriaPage extends StatefulWidget {
 }
 
 class _CriteriaPageState extends State<CriteriaPage> {
+
+  var cashFlowCriteriaController = MoneyMaskedTextController(
+      decimalSeparator: '.', thousandSeparator: ',', leftSymbol: '\$');
+  var _cashFlowCriteria;
+  double cashFlowCriteriaSliderValue = 0;
 
   var cashOnCashCriteriaController = MoneyMaskedTextController(
       decimalSeparator: '.', thousandSeparator: ',', rightSymbol: '%');
@@ -43,7 +49,7 @@ class _CriteriaPageState extends State<CriteriaPage> {
         centerTitle: true,
         backgroundColor: Colors.lightBlueAccent,
       ),
-      body: Container(
+      body: Container(padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
         //color: Colors.white,
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -72,7 +78,50 @@ class _CriteriaPageState extends State<CriteriaPage> {
                 ),
               ],
             ),
-            Padding(padding: EdgeInsets.all(20.0),),
+            Divider(
+              color: Colors.white,
+              thickness: 1.0,
+            ),
+            Container(
+              alignment: Alignment.bottomLeft,
+              child: Text('Minimum Cash Flow/Unit',
+                style: inputLabelStyle,
+              ),
+            ),
+            Neumorphic(margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
+              style: neumorphicTextFieldStyle,
+              child: TextField(
+                  style: textInputStyle,
+                  textAlign: TextAlign.center,
+                  textAlignVertical: TextAlignVertical.bottom,
+                  controller: cashFlowCriteriaController,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
+                  decoration: textInputDecoration
+              ),
+            ),
+            Slider(
+              value: cashFlowCriteriaSliderValue,
+              min: 0,
+              max: 1000,
+              divisions: 100,
+              activeColor: Colors.lightBlue,
+              inactiveColor: Colors.grey[600],
+              //label: downPaymentSliderValue.round().toString(),
+
+              //onChanged: (downPaymentSliderValue) => setState(() => this.downPaymentSliderValue = downPaymentSliderValue),
+              //onChangeEnd: (downPaymentSliderValue) => setState(() => downPaymentController.text = downPaymentSliderValue.toString()),
+              onChanged: (double purchasePriceSliderValue) {
+                setState(() {
+                  this.cashFlowCriteriaSliderValue = purchasePriceSliderValue;
+                  cashFlowCriteriaController.text = (purchasePriceSliderValue*10).toString();
+                });
+              },
+
+            ),
+            Padding(padding: EdgeInsets.all(20.0)),
             Container(
               alignment: Alignment.bottomLeft,
               child: Text('Minimum Cash on Cash Return',
@@ -96,7 +145,7 @@ class _CriteriaPageState extends State<CriteriaPage> {
             Slider(
               value: cashOnCashCriteriaSliderValue,
               min: 0,
-              max: 1000000,
+              max: 100,
               divisions: 100,
               activeColor: Colors.lightBlue,
               inactiveColor: Colors.grey[600],
@@ -112,7 +161,7 @@ class _CriteriaPageState extends State<CriteriaPage> {
               },
 
             ),
-            Padding(padding: EdgeInsets.all(10.0)),
+            Padding(padding: EdgeInsets.all(20.0)),
           ],
         ),
       ),

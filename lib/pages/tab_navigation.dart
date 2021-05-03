@@ -12,7 +12,7 @@ class TabNavigationPage extends StatefulWidget {
 }
 
 class _TabNavigationState extends State<TabNavigationPage> {
-  static int _selectedPage = 1;
+  static int _selectedPage = 2;
   final _pageOptions = [
     LoginPage(),
     CriteriaPage(),
